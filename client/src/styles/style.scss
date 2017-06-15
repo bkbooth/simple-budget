@@ -1,0 +1,23 @@
+$baseFontFamily: 'proxima-nova', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+$baseFontWeight: normal;
+$baseFontSize: 15px;
+$baseLineHeight: 18px;
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  box-sizing: border-box;
+}
+
+html, body, #app-root, #app-root {
+  height: 100%;
+}
+
+body, button, input, textarea {
+  font-family: $baseFontFamily;
+  font-weight: $baseFontWeight;
+  font-size: $baseFontSize;
+  line-height: $baseLineHeight;
+}
