@@ -1,7 +1,7 @@
 module Model exposing (..)
 
-import User exposing (User)
-import Budget exposing (Budget)
+import Data.User exposing (User)
+import Data.Budget exposing (Budget)
 
 
 type alias Model =

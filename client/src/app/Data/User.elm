@@ -1,4 +1,4 @@
-module User exposing (..)
+module Data.User exposing (..)
 
 import Date exposing (Date)
 

@@ -1,4 +1,4 @@
-module Period exposing (..)
+module Data.Period exposing (..)
 
 
 type Period

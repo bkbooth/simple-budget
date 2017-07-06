@@ -1,7 +1,7 @@
-module ActualItem exposing (..)
+module Data.ActualItem exposing (..)
 
 import Date exposing (Date)
-import ExpectedItem exposing (ExpectedItem)
+import Data.ExpectedItem exposing (ExpectedItem)
 
 
 type alias ActualItem =

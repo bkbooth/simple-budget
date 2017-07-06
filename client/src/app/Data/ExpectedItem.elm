@@ -1,8 +1,8 @@
-module ExpectedItem exposing (..)
+module Data.ExpectedItem exposing (..)
 
 import Date exposing (Date)
-import ItemType exposing (ItemType)
-import Period exposing (Period)
+import Data.ItemType exposing (ItemType)
+import Data.Period exposing (Period)
 
 
 type alias ExpectedItem =

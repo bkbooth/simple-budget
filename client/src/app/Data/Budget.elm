@@ -1,10 +1,10 @@
-module Budget exposing (..)
+module Data.Budget exposing (..)
 
 import Date exposing (Date)
-import User exposing (User)
-import ExpectedItem exposing (ExpectedItem)
-import ActualItem exposing (ActualItem)
-import Period exposing (Period)
+import Data.User exposing (User)
+import Data.ExpectedItem exposing (ExpectedItem)
+import Data.ActualItem exposing (ActualItem)
+import Data.Period exposing (Period)
 
 
 type alias Budget =

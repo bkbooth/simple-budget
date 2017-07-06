@@ -1,4 +1,4 @@
-module ItemType exposing (..)
+module Data.ItemType exposing (..)
 
 
 type ItemType
