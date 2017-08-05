@@ -1,6 +1,11 @@
 {
   "db": {
+    "host": "localhost",
+    "port": 5432,
+    "database": "simple_budget",
+    "password": "simple_budget",
     "name": "db",
-    "connector": "memory"
+    "user": "simple_budget",
+    "connector": "postgresql"
   }
 }
