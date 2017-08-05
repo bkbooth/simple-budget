@@ -1,0 +1,6 @@
+# Copy this file to .env and update any variables
+
+# Database
+POSTGRES_DB=simple_budget
+POSTGRES_USER=simple_budget
+POSTGRES_PASSWORD=simple_budget

@@ -1,0 +1,36 @@
+version: '3'
+
+# Setup .env file for environment variables (copy env-example)
+
+services:
+  # client:
+  #   build: client/
+  #   command: npm run start
+  #   depends_on:
+  #     - server
+  #   ports:
+  #     - 5000:5000
+  #   volumes:
+  #     - ./client/src/:/usr/src/app/src/
+
+  server:
+    build: server/
+    command: ./wait-for.sh db:5432 -- nodemon .
+    depends_on:
+      - db
+    ports:
+      - 3000:3000
+    volumes:
+      - ./server/server/:/usr/src/app/server/
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+
+  db:
+    build: db/
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
