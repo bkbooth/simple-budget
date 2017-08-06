@@ -1,7 +1,7 @@
 'use strict'
 
-const server = require('./server')
-const ds = server.dataSources.db
+const app = require('./server')
+const db = app.dataSources.db
 const lbTables = [
   'Customer',
   'AccessToken',
@@ -14,6 +14,6 @@ const lbTables = [
   'ActualItem',
 ]
 
-ds.automigrate(lbTables)
-  .then(() => console.log(`Loopback tables [${lbTables.join(', ')}] created in ${ds.adapter.name}`))
-  .then(() => ds.disconnect())
+db.automigrate(lbTables)
+  .then(() => console.log(`Loopback tables [${lbTables.join(', ')}] created in ${db.adapter.name}`))
+  .then(() => db.disconnect())

@@ -3,10 +3,7 @@
   "base": "PersistedModel",
   "idInjection": false,
   "options": {
-    "validateUpsert": true,
-    "postgresql": {
-      "table": "actual_item"
-    }
+    "validateUpsert": true
   },
   "properties": {
     "id": {
@@ -19,10 +16,7 @@
       "required": true
     },
     "valueDate": {
-      "type": "date",
-      "postgresql": {
-        "columnName": "value_date"
-      }
+      "type": "date"
     },
     "comment": {
       "type": "string"
@@ -40,7 +34,7 @@
     "expectedItem": {
       "type": "belongsTo",
       "model": "ExpectedItem",
-      "foreignKey": "expected_item_id"
+      "foreignKey": "expectedItemId"
     }
   },
   "acls": [],

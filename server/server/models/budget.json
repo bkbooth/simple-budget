@@ -9,7 +9,7 @@
     "id": {
       "type": "string",
       "id": true,
-      "default": "uuidv4"
+      "defaultFn": "uuidv4"
     },
     "name": {
       "type": "string",
@@ -36,12 +36,12 @@
     "expectedItems": {
       "type": "hasMany",
       "model": "ExpectedItem",
-      "foreignKey": "budget_id"
+      "foreignKey": "budgetId"
     },
     "actualItems": {
       "type": "hasMany",
       "model": "ActualItem",
-      "foreignKey": "budget_id"
+      "foreignKey": "budgetId"
     }
   },
   "acls": [],

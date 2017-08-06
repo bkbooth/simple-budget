@@ -3,10 +3,7 @@
   "base": "PersistedModel",
   "idInjection": false,
   "options": {
-    "validateUpsert": true,
-    "postgresql": {
-      "table": "expected_item"
-    }
+    "validateUpsert": true
   },
   "properties": {
     "id": {
@@ -16,10 +13,7 @@
     },
     "itemType": {
       "type": "string",
-      "required": true,
-      "postgresql": {
-        "columnName": "item_type"
-      }
+      "required": true
     },
     "name": {
       "type": "string",
@@ -34,10 +28,7 @@
       "required": true
     },
     "dueDate": {
-      "type": "date",
-      "postgresql": {
-        "columnName": "due_date"
-      }
+      "type": "date"
     },
     "archived": {
       "type": "boolean",

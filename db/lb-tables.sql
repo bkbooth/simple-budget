@@ -91,29 +91,29 @@ ALTER SEQUENCE acl_id_seq OWNED BY acl.id;
 
 
 --
--- Name: actual_item; Type: TABLE; Schema: public; Owner: :db_user
+-- Name: actualitem; Type: TABLE; Schema: public; Owner: :db_user
 --
 
-CREATE TABLE actual_item (
+CREATE TABLE actualitem (
     id text NOT NULL,
     value integer NOT NULL,
-    value_date timestamp with time zone,
+    valuedate timestamp with time zone,
     comment text,
     created timestamp with time zone,
     modified timestamp with time zone,
-    expected_item_id text,
-    budget_id text
+    expecteditemid text,
+    budgetid text
 );
 
 
-ALTER TABLE actual_item OWNER TO :db_user;
+ALTER TABLE actualitem OWNER TO :db_user;
 
 --
 -- Name: budget; Type: TABLE; Schema: public; Owner: :db_user
 --
 
 CREATE TABLE budget (
-    id text DEFAULT 'uuidv4'::text NOT NULL,
+    id text NOT NULL,
     name text NOT NULL,
     period text NOT NULL,
     archived boolean DEFAULT false,
@@ -179,24 +179,24 @@ ALTER SEQUENCE customerbudget_id_seq OWNED BY customerbudget.id;
 
 
 --
--- Name: expected_item; Type: TABLE; Schema: public; Owner: :db_user
+-- Name: expecteditem; Type: TABLE; Schema: public; Owner: :db_user
 --
 
-CREATE TABLE expected_item (
+CREATE TABLE expecteditem (
     id text NOT NULL,
-    item_type text NOT NULL,
+    itemtype text NOT NULL,
     name text NOT NULL,
     period text NOT NULL,
     value integer NOT NULL,
-    due_date timestamp with time zone,
+    duedate timestamp with time zone,
     archived boolean DEFAULT false,
     created timestamp with time zone,
     modified timestamp with time zone,
-    budget_id text
+    budgetid text
 );
 
 
-ALTER TABLE expected_item OWNER TO :db_user;
+ALTER TABLE expecteditem OWNER TO :db_user;
 
 --
 -- Name: role; Type: TABLE; Schema: public; Owner: :db_user
@@ -321,10 +321,10 @@ SELECT pg_catalog.setval('acl_id_seq', 1, false);
 
 
 --
--- Data for Name: actual_item; Type: TABLE DATA; Schema: public; Owner: :db_user
+-- Data for Name: actualitem; Type: TABLE DATA; Schema: public; Owner: :db_user
 --
 
-COPY actual_item (id, value, value_date, comment, created, modified, expected_item_id, budget_id) FROM stdin;
+COPY actualitem (id, value, valuedate, comment, created, modified, expecteditemid, budgetid) FROM stdin;
 \.
 
 
@@ -360,10 +360,10 @@ SELECT pg_catalog.setval('customerbudget_id_seq', 1, false);
 
 
 --
--- Data for Name: expected_item; Type: TABLE DATA; Schema: public; Owner: :db_user
+-- Data for Name: expecteditem; Type: TABLE DATA; Schema: public; Owner: :db_user
 --
 
-COPY expected_item (id, item_type, name, period, value, due_date, archived, created, modified, budget_id) FROM stdin;
+COPY expecteditem (id, itemtype, name, period, value, duedate, archived, created, modified, budgetid) FROM stdin;
 \.
 
 
@@ -414,11 +414,11 @@ ALTER TABLE ONLY acl
 
 
 --
--- Name: actual_item actual_item_pkey; Type: CONSTRAINT; Schema: public; Owner: :db_user
+-- Name: actualitem actualitem_pkey; Type: CONSTRAINT; Schema: public; Owner: :db_user
 --
 
-ALTER TABLE ONLY actual_item
-    ADD CONSTRAINT actual_item_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY actualitem
+    ADD CONSTRAINT actualitem_pkey PRIMARY KEY (id);
 
 
 --
@@ -446,11 +446,11 @@ ALTER TABLE ONLY customerbudget
 
 
 --
--- Name: expected_item expected_item_pkey; Type: CONSTRAINT; Schema: public; Owner: :db_user
+-- Name: expecteditem expecteditem_pkey; Type: CONSTRAINT; Schema: public; Owner: :db_user
 --
 
-ALTER TABLE ONLY expected_item
-    ADD CONSTRAINT expected_item_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY expecteditem
+    ADD CONSTRAINT expecteditem_pkey PRIMARY KEY (id);
 
 
 --
