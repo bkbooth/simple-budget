@@ -9,5 +9,5 @@ type alias User =
     , name : String
     , picture : String
     , created : Date
-    , updated : Date
+    , modified : Date
     }

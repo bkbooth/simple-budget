@@ -16,5 +16,5 @@ type alias Budget =
     , actualItems : List ActualItem
     , archived : Bool
     , created : Date
-    , updated : Date
+    , modified : Date
     }

@@ -9,9 +9,9 @@ module.exports = function(ExpectedItem) {
 
   ExpectedItem.observe('before save', (ctx, next) => {
     if (ctx.instance)
-      ctx.instance.updated = Date.now()
+      ctx.instance.modified = Date.now()
     else
-      ctx.data.updated = Date.now()
+      ctx.data.modified = Date.now()
 
     next()
   })

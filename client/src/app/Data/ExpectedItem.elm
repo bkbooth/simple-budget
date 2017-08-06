@@ -14,5 +14,5 @@ type alias ExpectedItem =
     , dueDate : Date
     , archived : Bool
     , created : Date
-    , updated : Date
+    , modified : Date
     }
