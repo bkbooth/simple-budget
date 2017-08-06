@@ -1,0 +1,49 @@
+{
+  "name": "Budget",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "id": true,
+      "default": "uuidv4"
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "period": {
+      "type": "string",
+      "required": true
+    },
+    "archived": {
+      "type": "boolean",
+      "default": false
+    },
+    "created": {
+      "type": "date",
+      "defaultFn": "now"
+    },
+    "modified": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "expectedItems": {
+      "type": "hasMany",
+      "model": "ExpectedItem",
+      "foreignKey": "budget_id"
+    },
+    "actualItems": {
+      "type": "hasMany",
+      "model": "ActualItem",
+      "foreignKey": "budget_id"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
