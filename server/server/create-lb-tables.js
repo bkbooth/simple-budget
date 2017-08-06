@@ -2,7 +2,14 @@
 
 const server = require('./server')
 const ds = server.dataSources.db
-const lbTables = ['User', 'AccessToken', 'ACL', 'RoleMapping', 'Role']
+const lbTables = [
+  'User',
+  'AccessToken',
+  'ACL',
+  'RoleMapping',
+  'Role',
+  'ExpectedItem',
+]
 
 ds.automigrate(lbTables)
   .then(() => console.log(`Loopback tables [${lbTables.join(', ')}] created in ${ds.adapter.name}`))

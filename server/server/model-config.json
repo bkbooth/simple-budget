@@ -34,5 +34,9 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "ExpectedItem": {
+    "dataSource": "db",
+    "public": true
   }
 }

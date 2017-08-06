@@ -3,6 +3,7 @@
 
   "rules": {
     "max-len": ["error", 120, 2],
-    "semi": ["error", "never"]
+    "semi": ["error", "never"],
+    "object-curly-spacing": ["error", "always"]
   }
 }

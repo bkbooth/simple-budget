@@ -1,0 +1,51 @@
+{
+  "name": "ExpectedItem",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "id": true,
+      "defaultFn": "uuidv4"
+    },
+    "itemType": {
+      "type": "string",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "period": {
+      "type": "string",
+      "required": true
+    },
+    "value": {
+      "type": "number",
+      "required": true
+    },
+    "dueDate": {
+      "type": "date",
+      "required": false
+    },
+    "archived": {
+      "type": "boolean",
+      "default": false
+    },
+    "created": {
+      "type": "date",
+      "defaultFn": "now"
+    },
+    "updated": {
+      "type": "date",
+      "required": false
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
