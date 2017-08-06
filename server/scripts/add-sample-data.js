@@ -2,7 +2,7 @@
 
 if (process.env.NODE_ENV === 'production') return
 
-const app = require('./server')
+const app = require('../server/server')
 
 // Check for and add a user
 app.models.Customer.count()
@@ -79,3 +79,4 @@ app.models.Customer.count()
         console.log(`Created ${actualItems.length} actual items`))
   })
   .catch((err) => console.log(err.message))
+  .then(() => process.exit())

@@ -1,6 +1,6 @@
 'use strict'
 
-const app = require('./server')
+const app = require('../server/server')
 const db = app.dataSources.db
 const lbTables = [
   'Customer',
@@ -17,3 +17,4 @@ const lbTables = [
 db.automigrate(lbTables)
   .then(() => console.log(`Loopback tables [${lbTables.join(', ')}] created in ${db.adapter.name}`))
   .then(() => db.disconnect())
+  .then(() => process.exit())
