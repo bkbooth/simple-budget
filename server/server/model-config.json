@@ -38,5 +38,9 @@
   "ExpectedItem": {
     "dataSource": "db",
     "public": true
+  },
+  "ActualItem": {
+    "dataSource": "db",
+    "public": true
   }
 }

@@ -9,6 +9,7 @@ const lbTables = [
   'RoleMapping',
   'Role',
   'ExpectedItem',
+  'ActualItem',
 ]
 
 ds.automigrate(lbTables)
