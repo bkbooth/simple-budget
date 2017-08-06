@@ -3,14 +3,15 @@
 const server = require('./server')
 const ds = server.dataSources.db
 const lbTables = [
-  'User',
+  'Customer',
   'AccessToken',
   'ACL',
   'RoleMapping',
   'Role',
+  'Budget',
+  'CustomerBudget',
   'ExpectedItem',
   'ActualItem',
-  'Budget',
 ]
 
 ds.automigrate(lbTables)
