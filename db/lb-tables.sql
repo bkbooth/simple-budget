@@ -46,7 +46,7 @@ CREATE TABLE accesstoken (
     ttl integer DEFAULT 1209600,
     scopes text,
     created timestamp with time zone,
-    userid integer
+    userid text
 );
 
 
@@ -89,6 +89,114 @@ ALTER TABLE acl_id_seq OWNER TO :db_user;
 
 ALTER SEQUENCE acl_id_seq OWNED BY acl.id;
 
+
+--
+-- Name: actual_item; Type: TABLE; Schema: public; Owner: :db_user
+--
+
+CREATE TABLE actual_item (
+    id text NOT NULL,
+    value integer NOT NULL,
+    value_date timestamp with time zone,
+    comment text,
+    created timestamp with time zone,
+    modified timestamp with time zone,
+    expected_item_id text,
+    budget_id text
+);
+
+
+ALTER TABLE actual_item OWNER TO :db_user;
+
+--
+-- Name: budget; Type: TABLE; Schema: public; Owner: :db_user
+--
+
+CREATE TABLE budget (
+    id text DEFAULT 'uuidv4'::text NOT NULL,
+    name text NOT NULL,
+    period text NOT NULL,
+    archived boolean DEFAULT false,
+    created timestamp with time zone,
+    modified timestamp with time zone
+);
+
+
+ALTER TABLE budget OWNER TO :db_user;
+
+--
+-- Name: customer; Type: TABLE; Schema: public; Owner: :db_user
+--
+
+CREATE TABLE customer (
+    id text NOT NULL,
+    picture text,
+    created timestamp with time zone,
+    modified timestamp with time zone,
+    realm text,
+    username text,
+    password text NOT NULL,
+    email text NOT NULL,
+    emailverified boolean,
+    verificationtoken text
+);
+
+
+ALTER TABLE customer OWNER TO :db_user;
+
+--
+-- Name: customerbudget; Type: TABLE; Schema: public; Owner: :db_user
+--
+
+CREATE TABLE customerbudget (
+    id integer NOT NULL,
+    customerid text,
+    budgetid text
+);
+
+
+ALTER TABLE customerbudget OWNER TO :db_user;
+
+--
+-- Name: customerbudget_id_seq; Type: SEQUENCE; Schema: public; Owner: :db_user
+--
+
+CREATE SEQUENCE customerbudget_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE customerbudget_id_seq OWNER TO :db_user;
+
+--
+-- Name: customerbudget_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: :db_user
+--
+
+ALTER SEQUENCE customerbudget_id_seq OWNED BY customerbudget.id;
+
+
+--
+-- Name: expected_item; Type: TABLE; Schema: public; Owner: :db_user
+--
+
+CREATE TABLE expected_item (
+    id text NOT NULL,
+    item_type text NOT NULL,
+    name text NOT NULL,
+    period text NOT NULL,
+    value integer NOT NULL,
+    due_date timestamp with time zone,
+    archived boolean DEFAULT false,
+    created timestamp with time zone,
+    modified timestamp with time zone,
+    budget_id text
+);
+
+
+ALTER TABLE expected_item OWNER TO :db_user;
 
 --
 -- Name: role; Type: TABLE; Schema: public; Owner: :db_user
@@ -162,48 +270,17 @@ ALTER SEQUENCE rolemapping_id_seq OWNED BY rolemapping.id;
 
 
 --
--- Name: user; Type: TABLE; Schema: public; Owner: :db_user
---
-
-CREATE TABLE "user" (
-    realm text,
-    username text,
-    password text NOT NULL,
-    email text NOT NULL,
-    emailverified boolean,
-    verificationtoken text,
-    id integer NOT NULL
-);
-
-
-ALTER TABLE "user" OWNER TO :db_user;
-
---
--- Name: user_id_seq; Type: SEQUENCE; Schema: public; Owner: :db_user
---
-
-CREATE SEQUENCE user_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE user_id_seq OWNER TO :db_user;
-
---
--- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: :db_user
---
-
-ALTER SEQUENCE user_id_seq OWNED BY "user".id;
-
-
---
 -- Name: acl id; Type: DEFAULT; Schema: public; Owner: :db_user
 --
 
 ALTER TABLE ONLY acl ALTER COLUMN id SET DEFAULT nextval('acl_id_seq'::regclass);
+
+
+--
+-- Name: customerbudget id; Type: DEFAULT; Schema: public; Owner: :db_user
+--
+
+ALTER TABLE ONLY customerbudget ALTER COLUMN id SET DEFAULT nextval('customerbudget_id_seq'::regclass);
 
 
 --
@@ -218,13 +295,6 @@ ALTER TABLE ONLY role ALTER COLUMN id SET DEFAULT nextval('role_id_seq'::regclas
 --
 
 ALTER TABLE ONLY rolemapping ALTER COLUMN id SET DEFAULT nextval('rolemapping_id_seq'::regclass);
-
-
---
--- Name: user id; Type: DEFAULT; Schema: public; Owner: :db_user
---
-
-ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass);
 
 
 --
@@ -248,6 +318,53 @@ COPY acl (model, property, accesstype, permission, principaltype, principalid, i
 --
 
 SELECT pg_catalog.setval('acl_id_seq', 1, false);
+
+
+--
+-- Data for Name: actual_item; Type: TABLE DATA; Schema: public; Owner: :db_user
+--
+
+COPY actual_item (id, value, value_date, comment, created, modified, expected_item_id, budget_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: budget; Type: TABLE DATA; Schema: public; Owner: :db_user
+--
+
+COPY budget (id, name, period, archived, created, modified) FROM stdin;
+\.
+
+
+--
+-- Data for Name: customer; Type: TABLE DATA; Schema: public; Owner: :db_user
+--
+
+COPY customer (id, picture, created, modified, realm, username, password, email, emailverified, verificationtoken) FROM stdin;
+\.
+
+
+--
+-- Data for Name: customerbudget; Type: TABLE DATA; Schema: public; Owner: :db_user
+--
+
+COPY customerbudget (id, customerid, budgetid) FROM stdin;
+\.
+
+
+--
+-- Name: customerbudget_id_seq; Type: SEQUENCE SET; Schema: public; Owner: :db_user
+--
+
+SELECT pg_catalog.setval('customerbudget_id_seq', 1, false);
+
+
+--
+-- Data for Name: expected_item; Type: TABLE DATA; Schema: public; Owner: :db_user
+--
+
+COPY expected_item (id, item_type, name, period, value, due_date, archived, created, modified, budget_id) FROM stdin;
+\.
 
 
 --
@@ -281,21 +398,6 @@ SELECT pg_catalog.setval('rolemapping_id_seq', 1, false);
 
 
 --
--- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: :db_user
---
-
-COPY "user" (realm, username, password, email, emailverified, verificationtoken, id) FROM stdin;
-\.
-
-
---
--- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: :db_user
---
-
-SELECT pg_catalog.setval('user_id_seq', 1, false);
-
-
---
 -- Name: accesstoken accesstoken_pkey; Type: CONSTRAINT; Schema: public; Owner: :db_user
 --
 
@@ -312,6 +414,46 @@ ALTER TABLE ONLY acl
 
 
 --
+-- Name: actual_item actual_item_pkey; Type: CONSTRAINT; Schema: public; Owner: :db_user
+--
+
+ALTER TABLE ONLY actual_item
+    ADD CONSTRAINT actual_item_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: budget budget_pkey; Type: CONSTRAINT; Schema: public; Owner: :db_user
+--
+
+ALTER TABLE ONLY budget
+    ADD CONSTRAINT budget_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: customer customer_pkey; Type: CONSTRAINT; Schema: public; Owner: :db_user
+--
+
+ALTER TABLE ONLY customer
+    ADD CONSTRAINT customer_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: customerbudget customerbudget_pkey; Type: CONSTRAINT; Schema: public; Owner: :db_user
+--
+
+ALTER TABLE ONLY customerbudget
+    ADD CONSTRAINT customerbudget_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: expected_item expected_item_pkey; Type: CONSTRAINT; Schema: public; Owner: :db_user
+--
+
+ALTER TABLE ONLY expected_item
+    ADD CONSTRAINT expected_item_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: role role_pkey; Type: CONSTRAINT; Schema: public; Owner: :db_user
 --
 
@@ -325,14 +467,6 @@ ALTER TABLE ONLY role
 
 ALTER TABLE ONLY rolemapping
     ADD CONSTRAINT rolemapping_pkey PRIMARY KEY (id);
-
-
---
--- Name: user user_pkey; Type: CONSTRAINT; Schema: public; Owner: :db_user
---
-
-ALTER TABLE ONLY "user"
-    ADD CONSTRAINT user_pkey PRIMARY KEY (id);
 
 
 --
