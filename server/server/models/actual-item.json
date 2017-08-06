@@ -11,9 +11,6 @@
       "id": true,
       "defaultFn": "uuidv4"
     },
-    "expectedItem": {
-      "type": "string"
-    },
     "value": {
       "type": "number",
       "required": true
@@ -33,7 +30,12 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "expectedItem": {
+      "type": "belongsTo",
+      "model": "ExpectedItem",
+    }
+  },
   "acls": [],
   "methods": {}
 }
