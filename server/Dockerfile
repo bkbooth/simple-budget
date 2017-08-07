@@ -1,4 +1,4 @@
-FROM node:8-alpine
+FROM node:6-alpine
 MAINTAINER Ben Booth <bkbooth@gmail.com>
 
 EXPOSE 3000
@@ -10,15 +10,15 @@ WORKDIR ${APP_DIR}
 VOLUME ${APP_DIR}server/
 
 # Install node globals
-RUN npm install --quiet --global nodemon
+RUN yarn global add nodemon
 
 # Install node dependencies
-COPY package.json package-lock.json node_modules/ ${APP_DIR}
+COPY package.json yarn.lock node_modules/ ${APP_DIR}
 RUN \
-  npm install --quiet && \
-  npm cache clean --quiet --force
+  yarn install && \
+  yarn cache clean
 
 # Copy files
 COPY . ${APP_DIR}
 
-CMD node .
+CMD yarn start
