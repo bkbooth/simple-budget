@@ -11,23 +11,21 @@ RUN mkdir -p ${APP_DIR}src/
 WORKDIR ${APP_DIR}
 VOLUME ${APP_DIR}src/
 
-# Install node/yarn globals
-RUN \
-  npm install --quiet --global yarn && \
-  yarn global add serve elm
+# Install node globals
+RUN npm install --quiet --global serve elm
 
 # Install node dependencies (shouldn't change much)
-COPY package.json yarn.lock ${APP_DIR}
+COPY package.json package-lock.json node_modules/ ${APP_DIR}
 RUN \
-  yarn install && \
-  yarn cache clean
+  npm install --quiet && \
+  npm cache clean --quiet
 
 # Install elm dependencies (should change more)
-COPY elm-package.json ${APP_DIR}
-RUN elm package install -y
+COPY elm-package.json elm-stuff/ ${APP_DIR}
+RUN elm-package install -y
 
 # Copy files
 COPY . ${APP_DIR}
 
 # CMD npm run build && serve dist
-CMD yarn build && serve dist
+CMD npm run build && serve dist

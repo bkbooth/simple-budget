@@ -9,10 +9,12 @@ RUN mkdir -p ${APP_DIR}server/
 WORKDIR ${APP_DIR}
 VOLUME ${APP_DIR}server/
 
+# Install node globals
+RUN npm install --quiet --global nodemon
+
 # Install node dependencies
-COPY package.json package-lock.json ${APP_DIR}
+COPY package.json package-lock.json node_modules/ ${APP_DIR}
 RUN \
-  npm install --quiet --global nodemon && \
   npm install --quiet && \
   npm cache clean --quiet --force
 
