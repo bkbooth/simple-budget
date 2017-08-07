@@ -32,7 +32,6 @@
     "webpack-merge": "^4.1.0"
   },
   "enagines": {
-    "node": ">=8",
-    "npm": ">=5"
+    "node": ">=6"
   }
 }
