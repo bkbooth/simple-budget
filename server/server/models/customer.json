@@ -1,5 +1,6 @@
 {
   "name": "Customer",
+  "plural": "Users",
   "base": "User",
   "idInjection": false,
   "options": {
