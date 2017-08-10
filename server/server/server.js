@@ -5,6 +5,11 @@ const boot = require('loopback-boot')
 
 const app = module.exports = loopback()
 
+// Add /Users/me vanity endpoint
+app.use(loopback.token({
+  currentUserLiteral: 'me',
+}))
+
 app.start = () => {
   // start the web server
   return app.listen(() => {
