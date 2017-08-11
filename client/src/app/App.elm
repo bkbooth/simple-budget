@@ -2,14 +2,22 @@ module App exposing (main)
 
 import Html exposing (Html)
 import Model exposing (Model, initialModel)
-import Update exposing (Msg, update)
-import View exposing (rootView)
+import Update exposing (Msg)
+import View
 
 
 main : Program Never Model Msg
 main =
-    Html.beginnerProgram
-        { model = initialModel
-        , update = update
-        , view = rootView
+    Html.program
+        { init = init
+        , update = Update.update
+        , subscriptions = Update.subscriptions
+        , view = View.rootView
         }
+
+
+init : ( Model, Cmd Msg )
+init =
+    ( initialModel
+    , Cmd.none
+    )

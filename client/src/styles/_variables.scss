@@ -1,0 +1,12 @@
+@import "~material-design-lite/src/color-definitions";
+
+/**
+ * MDL variable overrides
+ */
+/* ==========  Color & Themes  ========== */
+$trim-color-classes: true;
+$color-primary: $palette-cyan-500;
+$color-primary-dark: $palette-cyan-700;
+$color-accent: $palette-amber-900;
+$color-primary-contrast: $color-dark-contrast;
+$color-accent-contrast: $color-dark-contrast;

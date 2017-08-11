@@ -1,0 +1,10 @@
+// Sticky footer hack
+#elm-mdl-layout-main {
+  padding-bottom: 116px;
+
+  > .mdl-mini-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+}
