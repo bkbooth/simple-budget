@@ -5,15 +5,16 @@ EXPOSE 3000
 
 # Setup application directory
 ENV APP_DIR /usr/src/app/
-RUN mkdir -p ${APP_DIR}server/
+RUN mkdir -p ${APP_DIR}
 WORKDIR ${APP_DIR}
-VOLUME ${APP_DIR}server/
+VOLUME ${APP_DIR}
 
 # Install node globals
 RUN yarn global add nodemon
 
 # Install node dependencies
-COPY package.json yarn.lock node_modules/ ${APP_DIR}
+COPY package.json yarn.lock ${APP_DIR}
+COPY node_modules/ ${APP_DIR}node_modules/
 RUN \
   yarn install && \
   yarn cache clean
