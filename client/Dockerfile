@@ -7,21 +7,23 @@ EXPOSE 5000
 
 # Setup application directory
 ENV APP_DIR /usr/src/app/
-RUN mkdir -p ${APP_DIR}src/
+RUN mkdir -p ${APP_DIR}
 WORKDIR ${APP_DIR}
-VOLUME ${APP_DIR}src/
+VOLUME ${APP_DIR}
 
 # Install node globals
 RUN yarn global add serve elm
 
 # Install node dependencies (shouldn't change much)
-COPY package.json yarn.lock node_modules/ ${APP_DIR}
+COPY package.json yarn.lock ${APP_DIR}
+COPY node_modules/ ${APP_DIR}node_modules/
 RUN \
   yarn install && \
   yarn cache clean
 
 # Install elm dependencies (should change more)
-COPY elm-package.json elm-stuff/ ${APP_DIR}
+COPY elm-package.json ${APP_DIR}
+COPY elm-stuff/ ${APP_DIR}elm-stuff/
 RUN elm-package install -y
 
 # Copy files

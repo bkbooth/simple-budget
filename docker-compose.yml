@@ -11,7 +11,7 @@ services:
     ports:
       - 5000:5000
     volumes:
-      - ./client/src/:/usr/src/app/src/
+      - ./client/:/usr/src/app/
 
   server:
     build: server/
