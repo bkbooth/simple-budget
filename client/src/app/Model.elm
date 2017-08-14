@@ -1,8 +1,8 @@
-module Model exposing (..)
+module Model exposing (Model, initialModel)
 
-import Material
-import Data.User exposing (User)
 import Data.Budget exposing (Budget)
+import Data.User exposing (User)
+import Material
 
 
 type alias Model =

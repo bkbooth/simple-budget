@@ -1,4 +1,4 @@
-module Update exposing (..)
+module Update exposing (Msg(..), update, subscriptions)
 
 import Material
 import Model exposing (Model)
