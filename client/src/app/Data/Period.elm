@@ -1,6 +1,7 @@
-module Data.Period exposing (Period(..), decoder)
+module Data.Period exposing (Period(..), decoder, fromString)
 
 import Json.Decode as Decode exposing (Decoder)
+import Json.Decode.Extra
 
 
 type Period
@@ -13,26 +14,27 @@ type Period
 
 decoder : Decoder Period
 decoder =
-    Decode.string |> Decode.andThen labelToPeriodDecoder
+    Decode.string
+        |> Decode.andThen (Json.Decode.Extra.fromResult << fromString)
 
 
-labelToPeriodDecoder : String -> Decoder Period
-labelToPeriodDecoder periodLabel =
+fromString : String -> Result String Period
+fromString periodLabel =
     case periodLabel of
         "Week" ->
-            Decode.succeed Week
+            Ok Week
 
         "Fortnight" ->
-            Decode.succeed Fortnight
+            Ok Fortnight
 
         "Month" ->
-            Decode.succeed Month
+            Ok Month
 
         "Quarter" ->
-            Decode.succeed Quarter
+            Ok Quarter
 
         "Year" ->
-            Decode.succeed Year
+            Ok Year
 
         unknownPeriodLabel ->
-            Decode.fail ("Unknown period: " ++ unknownPeriodLabel)
+            Err ("Unknown period: " ++ unknownPeriodLabel)

@@ -1,6 +1,7 @@
-module Data.ItemType exposing (ItemType(..), decoder)
+module Data.ItemType exposing (ItemType(..), decoder, fromString)
 
 import Json.Decode as Decode exposing (Decoder)
+import Json.Decode.Extra
 
 
 type ItemType
@@ -12,23 +13,24 @@ type ItemType
 
 decoder : Decoder ItemType
 decoder =
-    Decode.string |> Decode.andThen labelToItemTypeDecoder
+    Decode.string
+        |> Decode.andThen (Json.Decode.Extra.fromResult << fromString)
 
 
-labelToItemTypeDecoder : String -> Decoder ItemType
-labelToItemTypeDecoder itemTypeLabel =
+fromString : String -> Result String ItemType
+fromString itemTypeLabel =
     case itemTypeLabel of
         "Income" ->
-            Decode.succeed Income
+            Ok Income
 
         "Bill" ->
-            Decode.succeed Bill
+            Ok Bill
 
         "Saving" ->
-            Decode.succeed Saving
+            Ok Saving
 
         "Donation" ->
-            Decode.succeed Donation
+            Ok Donation
 
         unknownItemTypeLabel ->
-            Decode.fail ("Unknown item type: " ++ unknownItemTypeLabel)
+            Err ("Unknown item type: " ++ unknownItemTypeLabel)
