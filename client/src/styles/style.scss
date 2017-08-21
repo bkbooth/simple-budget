@@ -1,3 +1,7 @@
 @import "./variables";
-@import "./vendor/material-design-lite";
-@import "./base";
+@import "./tachyons";
+@import "./extras";
+
+html, body {
+  min-height: 100%;
+}

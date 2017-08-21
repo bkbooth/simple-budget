@@ -1,7 +1,7 @@
 module App exposing (main)
 
 import Html exposing (Html)
-import Model exposing (Model, initialModel)
+import Model exposing (Model)
 import Update exposing (Msg)
 import View
 
@@ -18,6 +18,6 @@ main =
 
 init : ( Model, Cmd Msg )
 init =
-    ( initialModel
+    ( Model.initialModel
     , Cmd.none
     )

@@ -1,13 +1,11 @@
 module Update exposing (Msg(..), update, subscriptions)
 
-import Material
 import Model exposing (Model)
 
 
 type Msg
     = Increment
     | Decrement
-    | Mdl (Material.Msg Msg)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -22,9 +20,6 @@ update msg model =
             ( { model | counter = model.counter - 1 }
             , Cmd.none
             )
-
-        Mdl message_ ->
-            Material.update Mdl message_ model
 
 
 subscriptions : Model -> Sub Msg

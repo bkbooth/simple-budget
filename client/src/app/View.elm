@@ -1,54 +1,31 @@
 module View exposing (rootView)
 
 import Html exposing (Html)
-import Material.Button as Button
-import Material.Footer as Footer
-import Material.Grid as Grid
-import Material.Layout as Layout
-import Material.Options as Options
+import Html.Attributes as Attributes
+import Html.Events as Events
 import Model exposing (Model)
 import Update exposing (Msg(..))
 
 
 rootView : Model -> Html Msg
 rootView model =
-    Layout.render Mdl
-        model.mdl
-        [ Layout.fixedHeader
+    Html.div [ Attributes.id "app-root", Attributes.class "w-100 min-vh-100 bg-light-gray f4 sans-serif" ]
+        [ header model
+        , mainView model
+        , footer model
         ]
-        { header = [ header model ]
-        , drawer = []
-        , tabs = ( [], [] )
-        , main =
-            [ mainView model
-            , footer model
-            ]
-        }
 
 
 mainView : Model -> Html Msg
 mainView model =
-    Grid.grid []
-        [ Grid.cell []
-            [ Html.text ("Counter: " ++ toString model.counter)
-            , Html.br [] []
-            , Button.render Mdl
-                [ 0 ]
-                model.mdl
-                [ Button.raised
-                , Button.ripple
-                , Button.colored
-                , Options.onClick Increment
-                ]
+    Html.section [ Attributes.id "app-main", Attributes.class "mw8 ph3 p-header p-footer center" ]
+        [ Html.p [] [ Html.text ("Counter: " ++ toString model.counter) ]
+        , Html.p []
+            [ Html.button
+                [ Events.onClick Increment, Attributes.class "dib mr2" ]
                 [ Html.text "Increment" ]
-            , Button.render Mdl
-                [ 1 ]
-                model.mdl
-                [ Button.raised
-                , Button.ripple
-                , Button.colored
-                , Options.onClick Decrement
-                ]
+            , Html.button
+                [ Events.onClick Decrement, Attributes.class "dib" ]
                 [ Html.text "Decrement" ]
             ]
         ]
@@ -56,16 +33,13 @@ mainView model =
 
 header : Model -> Html Msg
 header model =
-    Layout.row
-        []
-        [ Layout.title [] [ Html.text "Simple Budget" ] ]
+    Html.header [ Attributes.class "bg-brand-primary fixed w-100 pv3 ph3 ph5-l shadow-2" ]
+        [ Html.a [ Attributes.href "/", Attributes.class "dib fw6 near-white no-underline dim ttu tracked" ]
+            [ Html.text "Simple Budget" ]
+        ]
 
 
 footer : Model -> Html Msg
 footer model =
-    Footer.mini []
-        { left =
-            Footer.left []
-                [ Footer.logo [] [ Footer.html <| Html.text "© 2017 Ben Booth" ] ]
-        , right = Nothing
-        }
+    Html.footer [ Attributes.class "bg-dark-gray moon-gray f5 fixed bottom-0 w-100 pv4 ph3 ph5-l shadow-2" ]
+        [ Html.text "© 2017 Ben Booth" ]

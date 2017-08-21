@@ -1,12 +1,7 @@
-@import "~material-design-lite/src/color-definitions";
+@import "~tachyons-sass/scss/colors";
 
-/**
- * MDL variable overrides
- */
-/* ==========  Color & Themes  ========== */
-$trim-color-classes: true;
-$color-primary: $palette-cyan-500;
-$color-primary-dark: $palette-cyan-700;
-$color-accent: $palette-amber-900;
-$color-primary-contrast: $color-dark-contrast;
-$color-accent-contrast: $color-dark-contrast;
+$brand-primary: #00a8d6;
+$brand-secondary: $yellow;
+
+$header-height: 55px;
+$footer-height: 82px;
